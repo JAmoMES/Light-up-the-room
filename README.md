@@ -6,3 +6,8 @@
 ## Project Documents
 * [Vision statement]()
 * [Requirement]()
+
+## Front-end Team
+## Back-end Team
+## Hardware Team
+
