@@ -4,3 +4,5 @@
 โปรเจคนี้เป็นส่วนหนึ่งของค่ายทะลุฟ้า [exceed camp](https://exceed.cpsk-club.xyz/) ครั้งที่ 17 ในส่วนของ[ภาควิชาวิศวกรรมคอมพิวเตอร์](https://www.cpe.ku.ac.th/?lang=en) [มหาวิทยาลัยเกษตรศาสตร์](https://www.ku.ac.th/th)
 
 ## Project Documents
+* [Vision statement]()
+* [Requirement]()
