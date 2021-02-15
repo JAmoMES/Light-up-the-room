@@ -7,9 +7,6 @@
 * [Vision statement](../../wiki/Vision%20Statement)
 * [Requirement](../../wiki/Requirement)
 
-code review
-* [Script]()
-
 iterations
 * [Iteration1]() and [Task Board]()
 
