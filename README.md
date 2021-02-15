@@ -11,10 +11,6 @@ code review
 * [Script]()
 
 iterations
-* [Iteration1] and [Task Board]
+* [Iteration1]() and [Task Board]()
 
-## Front-end Team
-* [สรุจ สัตยานุรักษ์]()
-## Back-end Team
-## Hardware Team
 
