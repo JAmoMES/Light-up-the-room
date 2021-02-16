@@ -1,0 +1,18 @@
+
+
+body{
+    background-image: url("images/bg.jpg");
+    background-size: cover;
+}
+
+header{
+    margin-top: 70px;
+    text-align: center;
+    
+}
+
+header .jumbotron{
+    background-color: rgba(184, 184, 184, 0.4);
+    height: 80px;
+    
+}
