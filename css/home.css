@@ -7,3 +7,14 @@ body{
     background-size: cover;
 }
 
+header{
+    padding-top: 70px;
+    text-align: center;
+    
+}
+
+header .jumbotron{
+    background-color: rgba(184, 184, 184, 0.664);
+    height: 80px;
+    
+}
