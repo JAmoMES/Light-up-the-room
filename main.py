@@ -10,8 +10,9 @@ admin_db = mongo.db.admin_user
 people_db = mongo.db.people
 room_info_db = mongo.db.room_info
 
+#---------------------------- HARDWARE --------------------------------------
 @app.route('/hardware', methods=['POST'])
-def insert_one():
+def hardware_insert_one():
     data = request.json
     myInsert = {
             'Type' : 'Room_info',
@@ -30,7 +31,7 @@ def insert_one():
 
 
 @app.route('/hardware', methods=['PATCH'])
-def update_one():
+def hardware_update_one():
     data = request.json
     filt = {"ID": data["ID"], "Status": 1}
     updated_content = {"$set": {
@@ -46,7 +47,7 @@ def update_one():
     return {'result': 'light off'}
 
 @app.route('/hardware', methods=['GET'])
-def find():
+def hardware_find():
     flit = {"Status": 1}
     query = room_info_db.find(flit)
     res = []
@@ -60,6 +61,53 @@ def find():
         }
         res.append(tmp)
     return {"result": res}
+
+#--------------------------------- FRONT END ----------------------------------
+@app.route('/switch', methods=['POST'])
+def switch_insert_one():
+    data = request.json
+    myInsert = {
+            'Type' : 'Room_info',
+            'ID' : data["ID"],
+            'r': data["r"],
+            'g': data["g"],
+            'b': data["b"],
+            'w': data["w"],
+            'Status' : 1,
+            'Time_in' : datetime.now(), 
+            'Time_out' : None,
+            'Discord' : None
+            }
+    room_info_db.insert_one(myInsert)
+    return {'result': 'light on'}
+
+
+@app.route('/switch', methods=['PATCH'])
+def switch_update_one():
+    data = request.json
+    filt = {"ID": data["ID"], "Status": 1}
+    if data['r'] == 0 and data['g'] == 0 and data['b'] == 0 and data['w'] == 0:
+        updated_content = {"$set": {
+                                'r': 0,
+                                'g': 0,
+                                'b': 0,
+                                'w': 0,
+                                'Status' : 0,
+                                'Time_out' : datetime.now(),
+                               }
+                      }
+        room_info_db.update_one(filt, updated_content)
+        return {'result': 'light off'}
+    else:
+        updated_content = {"$set": {
+                                    'r': data['r'],
+                                    'g': data['g'],
+                                    'b': data['b'],
+                                    'w': data['w'],
+                                }
+                        }
+        room_info_db.update_one(filt, updated_content)
+        return {'result': 'light changed'}
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port='50005', debug=True)
