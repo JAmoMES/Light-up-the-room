@@ -14,3 +14,24 @@ header .jumbotron{
     height: 80px;
     
 }
+
+.container{
+    text-align: center;
+}
+.container-info{
+    display: inline-block;
+    text-align:  center;
+    margin-right: 300px;
+    width: 200px;
+    height: 300px;
+    
+}
+
+
+.container-graph{
+    display: inline-block;
+    text-align:  center;
+    width: 400px;
+    height: 500px;
+    
+}
