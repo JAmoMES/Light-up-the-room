@@ -13,9 +13,6 @@
         <a class="navbar-brand " style="margin-left: 10px ;" href = "Home.html">Light Up The Room</a>
         <div class="collapse navbar-collapse">
             <ul class= "navbar-nav " role="navigation">
-                <!-- <li class="nav-item">
-                    <a class="nav-link text-light" href = "Switch.html">SWITCH</a>
-                </li> -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-light" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       GRAPH
@@ -87,7 +84,7 @@
         </span>   
     </div>
 
-    <div class="container">
+    <div class="container-btn">
         <button type="button" class="btn btn-dark" id="btn1" data-bs-toggle="modal" data-bs-target="#activate_1">Activate</button>
         <button type="button" class="btn btn-dark" id="btn2" data-bs-toggle="modal" data-bs-target="#activate_2">Activate</button>
     </div>
@@ -102,31 +99,32 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+
                     <div class="form-check form-switch">
-                        <input type="checkbox" class="form-check-input" id="validationFormCheck1">
+                        <input type="checkbox" class="form-check-input" id="WhiteSelect">
                         <label class="form-check-label" for="validationFormCheck1">White</label>
                     </div>
 
                     <div class="form-check form-switch">
-                        <input type="checkbox" class="form-check-input" id="validationFormCheck2" >
+                        <input type="checkbox" class="form-check-input" id="RedSelect" >
                         <label class="form-check-label" for="validationFormCheck2">Red</label>
                     </div>
 
                     <div class="form-check form-switch">
-                        <input type="checkbox" class="form-check-input" id="validationFormCheck3" >
+                        <input type="checkbox" class="form-check-input" id="GreenSelect" >
                         <label class="form-check-label" for="validationFormCheck3">Green</label>
                     </div>
 
                     <div class="form-check form-switch">
-                        <input type="checkbox" class="form-check-input" id="validationFormCheck4" >
+                        <input type="checkbox" class="form-check-input" id="BlueSelect" >
                         <label class="form-check-label" for="validationFormCheck4">Blue</label>
                     </div>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Turn on</button>
-                    <button type="button" class="btn btn-danger">Turn Off</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Turn on</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Turn Off</button>
                 </div>
             </div>
         </div>
@@ -165,8 +163,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="getColor()">Turn on</button>
-                    <button type="button" class="btn btn-danger">Turn Off</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Turn on</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Turn Off</button>
                 </div>
             </div>
         </div>
