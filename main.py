@@ -35,14 +35,14 @@ def find():
     res = []
     for data in query:
         tmp = {
-            ID : data["ID"]
-            r: data["r"]
-            g: data["g"]
-            b: data["b"]
-            w: data["w"]
+            "ID" : data["ID"],
+            "r": data["r"],
+            "g": data["g"],
+            "b": data["b"],
+            "w": data["w"]
         }
         res.append(tmp)
-    return { "result": res }
+    return {"result": res}
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port='50005', debug=True)
