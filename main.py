@@ -14,7 +14,7 @@ room_info_db = mongo.db.room_info
 def insert_one():
     data = request.json
     myInsert = {
-            'Type' : {Room_info},
+            'Type' : 'Room_info',
             'ID' : data["ID"],
             'r': data["r"],
             'g': data["g"],
@@ -23,9 +23,9 @@ def insert_one():
             'Status' : 1,
             'Time_in' : datetime.now(), 
             'Time_out' : None,
-            'Discord' : - 
+            'Discord' : None
             }
-    room_info.insert_one(myInsert)
+    room_info_db.insert_one(myInsert)
     return {'result': 'room_info insert successfully'}
 
 @app.route('/hardware', methods=['GET'])
