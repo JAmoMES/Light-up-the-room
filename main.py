@@ -109,6 +109,22 @@ def switch_update_one():
         room_info_db.update_one(filt, updated_content)
         return {'result': 'light changed'}
 
+@app.route('/switch', methods=['GET'])
+def switch_find():
+    flit = {"Status": 1}
+    query = room_info_db.find(flit)
+    res = []
+    for data in query:
+        tmp = {
+            "ID" : data["ID"],
+            "r": data["r"],
+            "g": data["g"],
+            "b": data["b"],
+            "w": data["w"]
+        }
+        res.append(tmp)
+    return {"result": res}
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port='50005', debug=True)
     
