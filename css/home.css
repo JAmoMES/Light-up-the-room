@@ -4,6 +4,7 @@
 body{
     background-image: url("images/bg.jpg");
     background-size: cover;
+    background-repeat: no-repeat;
     
 }
 
@@ -27,7 +28,7 @@ header .jumbotron{
 }
 
 .container-fluid{
-    margin-top: 80px;
+    margin-top: 20px;
     font-size: 40px;
     text-align: center;
     white-space: nowrap;
@@ -72,4 +73,142 @@ header .jumbotron{
 }
 
 
+.container{
+    text-align: center;
+    margin-top: 50px;
+}
 
+#btn1{
+    margin-right: 450px;
+}
+
+.color-container1{
+    position: absolute;
+    white-space: break-spaces;
+    margin-left: 300px;
+    margin-top: 30px;
+}
+
+.color-container1 .color-container-white{
+    text-align: center;
+    padding-top: 12px;
+    background-color: rgba(107, 107, 107, 0.7);
+    width: 50px;
+    height: 50px;
+   
+}
+
+.color-container1 .color-container-red{
+    text-align: center;
+    padding-top: 12px;
+    background-color: rgba(107, 107, 107, 0.7);
+    width: 50px;
+    height: 50px;
+   
+}
+
+.color-container1 .color-container-green{
+    text-align: center;
+    padding-top: 12px;
+    background-color: rgba(107, 107, 107, 0.7);
+    width: 50px;
+    height: 50px;
+   
+}
+
+
+.color-container1 .color-container-blue{
+    text-align: center;
+    padding-top: 12px;
+    background-color: rgba(107, 107, 107, 0.7);
+    width: 50px;
+    height: 50px;
+}
+
+.color-container1 .color-container-white .text-container-white{
+    margin-top: -70px;
+
+}
+
+.color-container1 .color-container-red .text-container-red{
+    margin-top: -70px;
+
+}
+
+
+.color-container1 .color-container-green .text-container-green{
+    margin-top: -88px;
+
+}
+
+
+.color-container1 .color-container-blue .text-container-blue{
+    margin-top: -70px;
+
+}
+
+
+.color-container2{
+    position: absolute;
+    white-space: break-spaces;
+    margin-left: 1185px;
+    margin-top: 30px;
+}
+
+.color-container2 .color-container-white{
+    text-align: center;
+    padding-top: 12px;
+    background-color: rgba(107, 107, 107, 0.7);
+    width: 50px;
+    height: 50px;
+   
+}
+
+.color-container2 .color-container-red{
+    text-align: center;
+    padding-top: 12px;
+    background-color: rgba(107, 107, 107, 0.7);
+    width: 50px;
+    height: 50px;
+   
+}
+
+.color-container2 .color-container-green{
+    text-align: center;
+    padding-top: 12px;
+    background-color: rgba(107, 107, 107, 0.7);
+    width: 50px;
+    height: 50px;
+   
+}
+
+
+.color-container2 .color-container-blue{
+    text-align: center;
+    padding-top: 12px;
+    background-color: rgba(107, 107, 107, 0.7);
+    width: 50px;
+    height: 50px;
+}
+
+.color-container2 .color-container-white .text-container-white{
+    margin-top: -70px;
+
+}
+
+.color-container2 .color-container-red .text-container-red{
+    margin-top: -70px;
+
+}
+
+
+.color-container2 .color-container-green .text-container-green{
+    margin-top: -88px;
+
+}
+
+
+.color-container2 .color-container-blue .text-container-blue{
+    margin-top: -70px;
+
+}
