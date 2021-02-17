@@ -26,7 +26,24 @@ def insert_one():
             'Discord' : None
             }
     room_info_db.insert_one(myInsert)
-    return {'result': 'room_info insert successfully'}
+    return {'result': 'light on'}
+
+
+@app.route('/hardware', methods=['PATCH'])
+def update_one():
+    data = request.json
+    filt = {"ID": data["ID"], "Status": 1}
+    updated_content = {"$set": {
+                                'r': 0,
+                                'g': 0,
+                                'b': 0,
+                                'w': 0,
+                                'Status' : 0,
+                                'Time_out' : datetime.now(),
+                               }
+                      }
+    room_info_db.update_one(filt, updated_content)
+    return {'result': 'light off'}
 
 @app.route('/hardware', methods=['GET'])
 def find():
