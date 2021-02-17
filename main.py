@@ -48,8 +48,7 @@ def hardware_update_one():
 
 @app.route('/hardware', methods=['GET'])
 def hardware_find():
-    flit = {"Status": 1}
-    query = room_info_db.find(flit)
+    query = room_info_db.find().sort("_id", -1).limit(2)
     res = []
     for data in query:
         tmp = {
@@ -111,8 +110,7 @@ def switch_update_one():
 
 @app.route('/switch', methods=['GET'])
 def switch_find():
-    flit = {"Status": 1}
-    query = room_info_db.find(flit)
+    query = room_info_db.find().sort("_id", -1).limit(2)
     res = []
     for data in query:
         tmp = {
