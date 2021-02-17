@@ -31,10 +31,17 @@ def insert_one():
 @app.route('/hardware', methods=['GET'])
 def find():
     flit = {"Status": 1}
-    query = room_info.find(flit)
+    query = room_info_db.find(flit)
     res = []
     for data in query:
-        res.append(data)
+        tmp = {
+            ID : data["ID"]
+            r: data["r"]
+            g: data["g"]
+            b: data["b"]
+            w: data["w"]
+        }
+        res.append(tmp)
     return { "result": res }
 
 if __name__ == "__main__":
