@@ -1,13 +1,14 @@
 import os
 import discord
-from discord import team, message
-from discord import embeds
+from discord import team, message,embeds
 from discord.client import Client
 from discord.ext import commands
 from dotenv import load_dotenv
-import random
 from flask.globals import request
 from pymongo import MongoClient
+from datetime import datetime
+
+room_size = 2
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -18,11 +19,12 @@ client.remove_command('help')
 cluster = MongoClient(os.getenv('MONGO_URL'))
 db = cluster.exceed_group16
 collection = db.admin_user
+collection_room = db.room_info
 
-def embed_send(Title,role,Color,args : tuple):
+def embed_send(Title,role,Color,args : tuple,line=False):
     embedVar = discord.Embed(title=Title, description=role, color=Color)
     for i in range(0,len(args),2):
-        embedVar.add_field(name=args[i], value=args[i+1], inline=False)
+        embedVar.add_field(name=args[i], value=args[i+1], inline=line)
     return embedVar
 
 def info_user(message):
@@ -143,11 +145,84 @@ async def role(message,*args):
             except :
                 await message.channel.send(f"Who is {arg} ?")
 
-# @client.command()
-# async def color(messege,*args):
-#     if len(args) != 2:
-#         await message.channel.send("color []")
-#     embedVar = embed_send()
+@client.command()
+async def color(message,room,*args):
+    if len(args) == 0 : 
+        await message.channel.send("Error syntax please try...")
+        await message.channel.send("$color [room] [color1] [color2] ...")
+    elif len(args) > 4:
+        await message.channel.send("Error syntax. There is only 4 colors. ")
+    author = collection.find_one({'author_name': message.author.name + '#' + message.author.discriminator })
+    if author["permission"] >=1 :
+        filt = {'ID':int(room),'Time_out' : None }
+    else:
+        filt = {'ID':int(room),'Time_out' : None ,'Discord' : message.author.name + '#' + message.author.discriminator}
+    auth = collection_room.find_one(filt)
+    print(auth)
+    try:
+        print(auth["Discord"])
+    except:
+        return await message.channel.send("That isn't your room.")
+    updated_content = [0,0,0,0]
+    str_color = ''
+    for ele in args:
+        if str(ele).lower() == 'red':
+            updated_content[0]= 1
+            str_color += 'red '
+        elif str(ele).lower() == 'green':
+            updated_content[1] = 1
+            str_color += 'green '
+        elif str(ele).lower() == 'blue':
+            updated_content[2] = 1
+            str_color += 'blue '
+        elif str(ele).lower() == 'white':
+            updated_content[3] = 1
+            str_color += 'white '
+    print(updated_content)
+    collection_room.update_one(filt,{'$set' : {'r':updated_content[0]}})
+    collection_room.update_one(filt,{'$set' : {'g':updated_content[1]}})
+    collection_room.update_one(filt,{'$set' : {'b':updated_content[2]}})
+    collection_room.update_one(filt,{'$set' : {'w':updated_content[3]}})
+    command = ('change color to...',str_color)
+    print(command)
+    embedVar = embed_send(f"Room {room}                                        💡",None,0xFFC2E2,command,line=True)
+    await message.channel.send(embed=embedVar)
+
+@client.command()
+async def login(message,arg):
+    filt = {'ID':int(arg),'Time_out' : None ,'Discord' : None}
+    author = collection_room.find_one(filt)
+    print (author)
+    try:
+        print(author['ID'])
+        updated_content = {'$set' :{'Discord' : message.author.name + '#' + message.author.discriminator}}
+        collection_room.update_one(filt,updated_content)
+        await message.channel.send('You are now login.')
+    except:
+        await message.channel.send("You can't login. Please check room status.") 
+
+@client.command()
+async def logout(message,arg):
+    author = collection.find_one({'author_name': message.author.name + '#' + message.author.discriminator })
+    print( author)
+    if author["permission"] >=1 :
+        filt = {'ID':int(arg),'Time_out' : None }
+    else:
+        filt = {'ID':int(arg),'Time_out' : None ,'Discord' : message.author.name + '#' + message.author.discriminator}
+    # auth = collection_room.find_one(filt)
+    # print(auth)
+    try:
+        info = collection_room.find_one(filt)
+        print(info)
+        updated_content = {'$set' :{'Discord' : None}}
+        collection_room.update_one(filt,updated_content)
+        if author["permission"] <1 :
+            print(info['Discord'])
+            await message.channel.send('You are now logout.')
+        else :
+            await message.channel.send('Set logout successfully.')
+    except:
+        await message.channel.send("You don't have permission to set that room information. that isn't your room.") 
 
 @client.command()
 async def help(message):
@@ -160,6 +235,7 @@ async def help(message):
         author = collection.find_one(filt)
     command = ('$add_user','Add you to be new user.')
     command += ('$role','Show your role.')
+    command += ('$login','Login in your room by\n$login [room]')
     if author["permission"] == 0:
         command += ('$color','Change color in your room by \n$color [room] [color1] [color2] ...')
         command += ('$turn_on','Turn on switch in your room by \n$turn_on [room] [color1] [color2] ...')
@@ -177,8 +253,29 @@ async def help(message):
         role = f"These are Admin commands."
     else :
         role = f"These are User commands."
-    embedVar = embed_send("What I can help you?",role,0x221222,command)
+    embedVar = embed_send("What I can help you?                                         ⚙️",role,0x95FFF7,command)
     await message.channel.send(embed=embedVar)
+
+@client.command()
+async def status(message,*args):
+    if len(args) == 0:
+        filt = {'Time_out':None}
+        room = collection_room.find(filt)
+        room_num = []
+        for i in range(room_size):
+            room_num.append('Room '+str(i))
+        color_room = ['empty room']*room_size
+        for ele in room:
+            print(ele)
+            if ele["ID"] >= room_size:
+                continue
+            color_room[ele["ID"]] = 'red '*ele["r"]+'green '*ele["g"]+'blue '*ele["b"]+'white '*ele["w"]
+            if len(color_room[ele["ID"]]) == 0:
+                color_room[ele["ID"]] = 'no light'
+        status_room = (room_num[0],color_room[0],room_num[1],color_room[1])
+        embedVar = embed_send(f"Status                                             💡",None,0xFFC2E2,status_room,line=True)
+        await message.channel.send(embed=embedVar)
+        
 
 if __name__ == '__main__':
     client.run(TOKEN)   
