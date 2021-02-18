@@ -237,6 +237,7 @@ async def help(message):
     command += ('$role','Show your role.')
     command += ('$login','Login in your room by\n$login [room]')
     if author["permission"] == 0:
+        command += ('$status',"Show all of the room's status by \n$status or $status [room1] [room2] ..")
         command += ('$color','Change color in your room by \n$color [room] [color1] [color2] ...')
         command += ('$turn_on','Turn on switch in your room by \n$turn_on [room] [color1] [color2] ...')
         command += ('$turn_off','Turn on switch in your room by \n$turn_off [room]')
@@ -244,6 +245,7 @@ async def help(message):
         command += ('$add_permission','Change user to be admin by \n$add_permission [user1] ...')
         if author["permission"] == 2:
             command += ('$delete_permission','Change admin to be user by \n$add_permission [user1] ...')
+        command += ('$status',"Show all of the room's status by \n$status or $status [room1] [room2] ..")
         command += ('$color','Change color in any room by \n$color [room] [color1] [color2] ...')
         command += ('$turn_on','Turn on switch in any room by \n$turn_on [room] [color1] [color2] ...')
         command += ('$turn_off','Turn on switch in any room by \n$turn_off [room]')
@@ -272,10 +274,32 @@ async def status(message,*args):
             color_room[ele["ID"]] = 'red '*ele["r"]+'green '*ele["g"]+'blue '*ele["b"]+'white '*ele["w"]
             if len(color_room[ele["ID"]]) == 0:
                 color_room[ele["ID"]] = 'no light'
+            color_room[ele["ID"]] = "light color :" + color_room[ele["ID"]] 
         status_room = (room_num[0],color_room[0],room_num[1],color_room[1])
         embedVar = embed_send(f"Status                                             💡",None,0xFFC2E2,status_room,line=True)
         await message.channel.send(embed=embedVar)
-        
+    else:
+        status_room = tuple()
+        for room in args:
+            filt = {'Time_out':None,'ID':int(room)}
+            ele = collection_room.find_one(filt)
+            print (ele)
+            print (room)
+            if ele == None :
+                status_room += ('Room ' + str(room)),
+                status_room += 'empty room',
+                continue
+            color_room = 'red '*ele["r"]+'green '*ele["g"]+'blue '*ele["b"]+'white '*ele["w"]
+            if len(color_room) == 0:
+                color_room = 'no light'
+            color_room = "light color :" + color_room
+            status_room += ('Room ' + str(room)),
+            status_room += color_room,
+        embedVar = embed_send(f"Status"+"                    "*len(args)+"💡",None,0xFFC2E2,status_room,line=True)
+        await message.channel.send(embed=embedVar)
+
+
+
 
 if __name__ == '__main__':
     client.run(TOKEN)   
