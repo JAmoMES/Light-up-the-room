@@ -28,7 +28,7 @@
 // }
 
 function status1_set_light_on() {
-    document.getElementById("status1").innerHTML = "ON";
+    document.getElementById("status1_text").innerHTML = "ON";
     document.getElementById("status1").style.background = "yellow";
 
     white1 = document.getElementById("white1").checked
@@ -70,7 +70,7 @@ function status1_set_light_on() {
 }
 
 function status1_set_light_off() {
-    document.getElementById("status1").innerHTML = "OFF";
+    document.getElementById("status1_text").innerHTML = "OFF";
     document.getElementById("status1").style.background = "grey";
     document.getElementById("w1").style.background = "grey";
     document.getElementById("r1").style.background = "grey";
@@ -79,7 +79,7 @@ function status1_set_light_off() {
 }
 
 function status2_set_light_on() {
-    document.getElementById("status2").innerHTML = "ON";
+    document.getElementById("status2_text").innerHTML = "ON";
     document.getElementById("status2").style.background = "yellow";
 
     white2 = document.getElementById("white2").checked
@@ -121,7 +121,7 @@ function status2_set_light_on() {
 }
 
 function status2_set_light_off() {
-    document.getElementById("status2").innerHTML = "OFF";
+    document.getElementById("status2_text").innerHTML = "OFF";
     document.getElementById("status2").style.background = "grey";
     document.getElementById("w2").style.background = "grey";
     document.getElementById("r2").style.background = "grey";
