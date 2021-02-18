@@ -158,9 +158,21 @@ def switch_find():
 
 ############## GRAPH ##################
 
+@app.route('/cost_graph',methods=['GET'])
+@cross_origin()
+def cost_graph_cal():
+    data = room_info_db.find().sort("_id", -1)
+    res = {
+            "ID" : 0,
+            "Time_in" : 0
+          }
+    return {"result": res}
 
-
-
+@app.route('/people_graph',methods=['GET'])
+@cross_origin()
+def people_graph_cal():
+    res= {}
+    return {"result" : res}
 
 
 if __name__ == "__main__":
