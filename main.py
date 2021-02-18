@@ -1,10 +1,12 @@
 from flask import Flask, request
+from flask_cors import CORS, cross_origin
 from flask_pymongo import PyMongo
 from datetime import datetime
 
 app = Flask(__name__)
 app.config['MONGO_URI'] = 'mongodb://exceed_group16:7vyf5srq@158.108.182.0:2255/exceed_group16'
 mongo = PyMongo(app)
+cors = CORS(app, resource={r"/": {"origins": "*"}})
 
 admin_db = mongo.db.admin_user
 people_db = mongo.db.people
@@ -12,6 +14,7 @@ room_info_db = mongo.db.room_info
 
 #---------------------------- HARDWARE --------------------------------------#
 @app.route('/hardware', methods=['POST'])
+@cross_origin()
 def hardware_insert_one():
     data = request.json
     myInsert = {
@@ -31,6 +34,7 @@ def hardware_insert_one():
 
 
 @app.route('/hardware', methods=['PATCH'])
+@cross_origin()
 def hardware_update_one():
     data = request.json
     filt = {"ID": data["ID"], "Status": 1}
@@ -47,6 +51,7 @@ def hardware_update_one():
     return {'result': 'light off'}
 
 @app.route('/hardware', methods=['GET'])
+@cross_origin()
 def hardware_find():
     query = room_info_db.find().sort("_id", -1).limit(2)
     res = []
@@ -66,6 +71,7 @@ def hardware_find():
 ############## SWITCH ##################
 
 @app.route('/switch', methods=['POST'])
+@cross_origin()
 def switch_insert_one():
     data = request.json
     myInsert = {
@@ -85,6 +91,7 @@ def switch_insert_one():
 
 
 @app.route('/switch', methods=['PATCH'])
+@cross_origin()
 def switch_update_one():
     data = request.json
     filt = {"ID": data["ID"], "Status": 1}
@@ -127,6 +134,7 @@ def switch_update_one():
 #     return {"result": res}
 
 @app.route('/switch', methods=['GET'])
+@cross_origin()
 def switch_find():
     id = request.args.get("ID")
     filt = {"Status": 1 , "ID": int(id)}
@@ -148,9 +156,13 @@ def switch_find():
     res["w"] = data['w']
     return {"result": res}
 
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port='3000', debug=True)
-
 ############## GRAPH ##################
 
+
+
+
+
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port='3000', debug=True)
 
