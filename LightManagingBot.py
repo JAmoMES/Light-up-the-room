@@ -162,6 +162,8 @@ async def color(message,room,*args):
     try:
         print(auth["Discord"])
     except:
+        if author["permission"] >=1:
+            return await message.channel.send("That is empty room.")
         return await message.channel.send("That isn't your room.")
     updated_content = [0,0,0,0]
     str_color = ''
@@ -231,8 +233,12 @@ async def help(message):
     try:
         print (author["permission"])
     except:
-        add_user(message=message)
-        author = collection.find_one(filt)
+        user = {}
+        user['author_name'] = message.author.name + '#' + message.author.discriminator
+        user['name'] = message.author.name
+        user['author_ID'] = message.author.id
+        user['permission'] = 0
+        collection.insert_one(user)
     command = ('$add_user','Add you to be new user.')
     command += ('$role','Show your role.')
     command += ('$login','Login in your room by\n$login [room]')
@@ -240,15 +246,15 @@ async def help(message):
         command += ('$status',"Show all of the room's status by \n$status or $status [room1] [room2] ..")
         command += ('$color','Change color in your room by \n$color [room] [color1] [color2] ...')
         command += ('$turn_on','Turn on switch in your room by \n$turn_on [room] [color1] [color2] ...')
-        command += ('$turn_off','Turn on switch in your room by \n$turn_off [room]')
+        command += ('$turn_off','Turn off switch in your room by \n$turn_off [room]')
     else:
         command += ('$add_permission','Change user to be admin by \n$add_permission [user1] ...')
         if author["permission"] == 2:
             command += ('$delete_permission','Change admin to be user by \n$add_permission [user1] ...')
         command += ('$status',"Show all of the room's status by \n$status or $status [room1] [room2] ..")
         command += ('$color','Change color in any room by \n$color [room] [color1] [color2] ...')
-        command += ('$turn_on','Turn on switch in any room by \n$turn_on [room] [color1] [color2] ...')
-        command += ('$turn_off','Turn on switch in any room by \n$turn_off [room]')
+        command += ('$turn_on','Turn on switch in your room by \n$turn_on [room] [color1] [color2] ...')
+        command += ('$turn_off','Turn off switch in any room by \n$turn_off [room]')
     if author["permission"] == 2:
         role = f"These are Super Admin commands."
     elif author["permission"] == 1:
@@ -292,14 +298,75 @@ async def status(message,*args):
             color_room = 'red '*ele["r"]+'green '*ele["g"]+'blue '*ele["b"]+'white '*ele["w"]
             if len(color_room) == 0:
                 color_room = 'no light'
-            color_room = "light color :" + color_room
+            color_room = "light color :\n" + color_room
             status_room += ('Room ' + str(room)),
             status_room += color_room,
         embedVar = embed_send(f"Status"+"                    "*len(args)+"💡",None,0xFFC2E2,status_room,line=True)
         await message.channel.send(embed=embedVar)
 
+@client.command()
+async def turn_on(message,room,*args):
+    filt = {'ID':int(room),'Time_out' : None}
+    auth = collection_room.find_one(filt)
+    if auth != None :
+        return await message.channel.send("This isn't empty room.")
+    myInsert = {
+            'Type' : 'Room_info',
+            'ID' : int(room),
+            'r': 0,
+            'g': 0,
+            'b': 0,
+            'w': 0,
+            'Status' : 1,
+            'Time_in' : datetime.now(), 
+            'Time_out' : None,
+            'Discord' : message.author.name + '#' + message.author.discriminator
+            }
+    str_color = ''
+    for ele in args:
+        if str(ele).lower() == 'red':
+            myInsert['r']= 1
+            str_color += 'red '
+        elif str(ele).lower() == 'green':
+            myInsert['g'] = 1
+            str_color += 'green '
+        elif str(ele).lower() == 'blue':
+            myInsert['b'] = 1
+            str_color += 'blue '
+        elif str(ele).lower() == 'white':
+            myInsert['w'] = 1
+            str_color += 'white '
+    collection_room.insert_one(myInsert)
+    if len(str_color) == 0:
+        str_color = 'no light'
+    command = ('light color :',str_color)
+    print(command)
+    embedVar = embed_send(f"Turn on : Room {room}                   💡",None,0xFFC2E2,command,line=True)
+    await message.channel.send(embed=embedVar)
 
-
+@client.command()
+async def turn_off(message,room):
+    author = collection.find_one({'author_name': message.author.name + '#' + message.author.discriminator })
+    if author["permission"] >=1 :
+        filt = {'ID':int(room),'Time_out' : None }
+    else:
+        filt = {'ID':int(room),'Time_out' : None ,'Discord' : message.author.name + '#' + message.author.discriminator}
+    auth = collection_room.find_one(filt)
+    print(auth)
+    try:
+        print(auth["Discord"])
+    except:
+        if author["permission"] >=1:
+            return await message.channel.send("That is empty room.")
+        return await message.channel.send("That isn't your room.")
+    collection_room.update_one(filt,{'$set' : {'Status':0}})
+    collection_room.update_one(filt,{'$set' : {'Time_out':datetime.now()}})
+    command = ('change status to...','empty room')
+    command += ('Time in',auth['Time_in'])
+    command += ('Time out',str(datetime.now()))
+    print(command)
+    embedVar = embed_send(f"Turn off : Room {room}                                💡",None,0xFFC2E2,command)
+    await message.channel.send(embed=embedVar)
 
 if __name__ == '__main__':
     client.run(TOKEN)   
