@@ -10,7 +10,7 @@ admin_db = mongo.db.admin_user
 people_db = mongo.db.people
 room_info_db = mongo.db.room_info
 
-#---------------------------- HARDWARE --------------------------------------
+#---------------------------- HARDWARE --------------------------------------#
 @app.route('/hardware', methods=['POST'])
 def hardware_insert_one():
     data = request.json
@@ -21,8 +21,8 @@ def hardware_insert_one():
             'g': data["g"],
             'b': data["b"],
             'w': data["w"],
-            'Status' : 1,
-            'Time_in' : datetime.now(), 
+            'Status' : int(1),
+            'Time_in' : datetime.now(),
             'Time_out' : None,
             'Discord' : None
             }
@@ -61,7 +61,10 @@ def hardware_find():
         res.append(tmp)
     return {"result": res}
 
-#--------------------------------- FRONT END ----------------------------------
+#--------------------------------- FRONT END ----------------------------------#
+
+############## SWITCH ##################
+
 @app.route('/switch', methods=['POST'])
 def switch_insert_one():
     data = request.json
@@ -72,8 +75,8 @@ def switch_insert_one():
             'g': data["g"],
             'b': data["b"],
             'w': data["w"],
-            'Status' : 1,
-            'Time_in' : datetime.now(), 
+            'Status' : int(1),
+            'Time_in' : datetime.now(),
             'Time_out' : None,
             'Discord' : None
             }
@@ -146,4 +149,8 @@ def switch_find():
     return {"result": res}
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port='50005', debug=True)
+    app.run(host='0.0.0.0', port='3000', debug=True)
+
+############## GRAPH ##################
+
+
