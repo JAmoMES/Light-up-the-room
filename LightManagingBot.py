@@ -298,7 +298,7 @@ async def status(message,*args):
             color_room = 'red '*ele["r"]+'green '*ele["g"]+'blue '*ele["b"]+'white '*ele["w"]
             if len(color_room) == 0:
                 color_room = 'no light'
-            color_room = "light color :\n" + color_room
+            color_room = "light color :" + color_room
             status_room += ('Room ' + str(room)),
             status_room += color_room,
         embedVar = embed_send(f"Status"+"                    "*len(args)+"💡",None,0xFFC2E2,status_room,line=True)
@@ -339,7 +339,7 @@ async def turn_on(message,room,*args):
     collection_room.insert_one(myInsert)
     if len(str_color) == 0:
         str_color = 'no light'
-    command = ('light color :',str_color)
+    command = ('light color : ',str_color)
     print(command)
     embedVar = embed_send(f"Turn on : Room {room}                   💡",None,0xFFC2E2,command,line=True)
     await message.channel.send(embed=embedVar)
