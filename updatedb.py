@@ -23,15 +23,22 @@ def insert_people(time):
 
 def update_people(time):
     filt = {"time": time}
-    query = room_info.find({})
+    query = room_info.aggregate([
+        { "$match": { "$or": [ 
+                                { "time_out": None }, 
+                                { "time_out": {"$gte": start_time, "$lt": stop_time } } 
+                             ] 
+                    } 
+        },
+        { "$count": "total_people"}
+        ],allowDiskUse=True)
+    total_people = query["total_people"]
     updated_content = {"$set": {
-                                'r': 0,
-                                'g': 0,
-                                'b': 0,
-                                'w': 0,
-                                'Status' : 0,
-                                'Time_out' : datetime.now(),
-                               }
+                                    "total_people" : total_people,
+                                    "total_used_time" : date_time.now() - start_time,
+                                    "date" : date_time.now(),
+                                    "avg_people" : total_people / (date_time.now() - start_time).min
+                                }
                       }
     people_db.update_one(filt, updated_content)
     return {'result': 'light off'}
