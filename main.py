@@ -20,10 +20,10 @@ def hardware_insert_one():
     myInsert = {
             'Type' : 'Room_info',
             'ID' : data["ID"],
-            'r': data["r"],
-            'g': data["g"],
-            'b': data["b"],
-            'w': data["w"],
+            'r': int(data["r"]),
+            'g': int(data["g"]),
+            'b': int(data["b"]),
+            'w': int(data["w"]),
             'Status' : int(1),
             'Time_in' : datetime.now(),
             'Time_out' : None,
@@ -76,11 +76,11 @@ def switch_insert_one():
     data = request.json
     myInsert = {
             'Type' : 'Room_info',
-            'ID' : data["ID"],
-            'r': data["r"],
-            'g': data["g"],
-            'b': data["b"],
-            'w': data["w"],
+            'ID' : int(data["ID"]),
+            'r': int(data["r"]),
+            'g': int(data["g"]),
+            'b': int(data["b"]),
+            'w': int(data["w"]),
             'Status' : int(1),
             'Time_in' : datetime.now(),
             'Time_out' : None,
@@ -157,7 +157,6 @@ def switch_find():
     return {"result": res}
 
 ############## GRAPH ##################
-<<<<<<< HEAD
 
 @app.route('/cost_graph',methods=['GET'])
 @cross_origin()
@@ -174,7 +173,6 @@ def cost_graph_cal():
 def people_graph_cal():
     res= {}
     return {"result" : res}
-=======
 @app.route('/people', methods=['POST'])
 @cross_origin()
 def switch_insert_one():
@@ -193,7 +191,6 @@ def switch_insert_one():
             }
     room_info_db.insert_one(myInsert)
     return {'result': 'light on'}
->>>>>>> 466ef0e756e548f1346fd6af8d766349bee6af16
 
 
 if __name__ == "__main__":
