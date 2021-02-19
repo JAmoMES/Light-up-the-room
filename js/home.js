@@ -1,33 +1,79 @@
-// $(document).ready(function(){
-//     $('.header').height($(window).height());
-// })
+function map_color(x){
+    if(x = false){
+        return 0;
+    }
+    if(x = true){
+        return 1;
+    }
+}
 
-// var ready = (callback) => {
-//     if (document.readyState != "loading") callback();
-//     else document.addEventListener("DOMContentLoaded", callback);
-// }
+let status = null
 
-// function getColor(){
-//     // return array and send to database
-// }
+function getStatus(light){
+    
+    url = "http://158.108.182.18:3000/switch?ID=" + String(light)
+    return fetch(url, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+    })
+    .then((data) => data.json())
+    .then((result) => {
+        status = result.result.Status
+    })
+}
 
-// function selectColor(){
-//     // get color in checkbox and put in to array
-// }
+function checkStatus(light){
 
-// // สร้าง function ไว้ส่งข้อมูล
-// function scream() {
-//     fetch("???", {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify({ author: author, content: content }),
-//     })
-//       .then((response) => response.text())
-//       .then((result) => console.log(result))
-//       .catch((error) => console.log("error", error));
-// }
+    getStatus(light).then(() => {
+        console.log(status)
+        if (status == 0){
+            return false
+        }
+        if (status == 1){
+            return true
+        }
+    });
+}
+
+// สร้าง function ไว้ส่งข้อมูล1
+function open_new(r_value, g_value, b_value, w_value, status, id) {
+    fetch("http://158.108.182.18:3000/switch", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ID: id, Status: status, b: 1, g: 1, r: 1, w: 1 }),
+    })
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+}
+
+// สร้าง function ไว้ส่งข้อมูล2
+function open_update(r_value, g_value, b_value, w_value, status, id) {
+    fetch("http://158.108.182.18:3000/switch", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ID: id, Status: status, b: 0, g: 1, r: 0, w: 1 }),
+    })
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+}
+
+
+function close(id) {
+    fetch("http://158.108.182.18:3000/switch", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ID: id, Status: 0, b: 0, g: 0, r: 0, w: 0 }),
+    })
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+}
+
 
 function status1_set_light_on() {
+
     document.getElementById("status1_text").innerHTML = "ON";
     document.getElementById("status1").style.background = "yellow";
 
@@ -67,6 +113,19 @@ function status1_set_light_on() {
     if (blue1 == true) {
         document.getElementById("b1").style.background = "blue";
     }
+
+    // update database
+
+    if(checkStatus(1) == 1){
+        console.log("ok")
+        open_update(map_color(red1), map_color(green1), map_color(blue1), map_color(white1), 1, 1);
+    }
+
+    else if(checkStatus(1) != 1){
+        console.log("not ok")
+        open_new(map_color(red1), map_color(green1), map_color(blue1), map_color(white1), 1, 1);
+    }
+
 }
 
 function status1_set_light_off() {
@@ -76,6 +135,7 @@ function status1_set_light_off() {
     document.getElementById("r1").style.background = "grey";
     document.getElementById("g1").style.background = "grey";
     document.getElementById("b1").style.background = "grey";
+    close(1);
 }
 
 function status2_set_light_on() {
@@ -118,6 +178,14 @@ function status2_set_light_on() {
     if (blue2 == true) {
         document.getElementById("b2").style.background = "blue";
     }
+
+    if(checkStatus(2) == 1){
+        open_update(map_color(red1), map_color(green1), map_color(blue1), map_color(white1), 1, 2);
+    }
+
+    else if(checkStatus(2) != 1){
+        open_new(map_color(red1), map_color(green1), map_color(blue1), map_color(white1), 1, 2);
+    }
 }
 
 function status2_set_light_off() {
@@ -127,6 +195,7 @@ function status2_set_light_off() {
     document.getElementById("r2").style.background = "grey";
     document.getElementById("g2").style.background = "grey";
     document.getElementById("b2").style.background = "grey";
+    close(2);
 }
 
 
@@ -136,4 +205,6 @@ document.getElementById("turn_off1").onclick = status1_set_light_off;
 document.getElementById("turn_on2").onclick = status2_set_light_on;
 document.getElementById("turn_off2").onclick = status2_set_light_off;
 
+
+checkStatus(1);
 
