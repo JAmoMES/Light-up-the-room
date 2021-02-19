@@ -12,7 +12,7 @@ admin_db = mongo.db.admin_user
 people_db = mongo.db.people
 room_info_db = mongo.db.room_info
 bill_db = mongo.db.electric_bill
-graph_db = mongo.db.graph_peoole
+graph_db = mongo.db.graph_people
 #---------------------------- HARDWARE --------------------------------------#
 @app.route('/hardware', methods=['POST'])
 @cross_origin()
@@ -169,30 +169,11 @@ def cost_graph_cal():
           }
     return {"result": res}
 
-@app.route('/people_graph',methods=['GET'])
-@cross_origin()
-def people_graph_cal():
-    res= {}
-    return {"result" : res}
-
-@app.route('/people', methods=['POST'])
-@cross_origin()
-def switch_insert_one():
-    data = request.json
-    myInsert = {
-            'Type' : 'Room_info',
-            'ID' : data["ID"],
-            'r': data["r"],
-            'g': data["g"],
-            'b': data["b"],
-            'w': data["w"],
-            'Status' : int(1),
-            'Time_in' : datetime.now(),
-            'Time_out' : None,
-            'Discord' : None
-            }
-    room_info_db.insert_one(myInsert)
-    return {'result': 'light on'}
+# @app.route('/people_graph',methods=['GET'])
+# @cross_origin()
+# def people_graph_cal():
+#     res= {}
+#     return {"result" : res}
  
  #calculate elec bill (ฮอนหาสูตรคิดค่าไฟมาใส่ให้หน่อย) time in sec
 def cal_bill(time):
@@ -204,86 +185,93 @@ def cal_bill(time):
 @app.route('/elecbill', methods=['GET'])
 @cross_origin()
 def bill():
-    frequency = request.args
+    frequency = int(request.args.get('f'))
     time = str(datetime.now()).split(':')
+    day = str(datetime.now()).split()[0]
+    clock = str(datetime.now()).split()[1].split('.')[0]
     bill_min = bill_db.find_one({"frequency": 0})
     bill_hour = bill_db.find_one({"frequency": 1})
     bill_day = bill_db.find_one({"frequency": 2})
-    active_room = room_info_db.find({"status":1})
-    sum =0
+    active_room = room_info_db.find({"Status":1})
+    sum1 =0
     for ele in active_room:
-        sum+=1
-    bill_min["time"].append(bill_min["time"][-1]+1)
-    bill_min["cost"].append(bill_min["cost"][-1] + cal_bill(sum))
+        sum1 +=1
+    bill_min["time"].append(clock)
+    bill_min["cost"].append(bill_min["cost"][-1] + cal_bill(sum1))
+    if len(bill_min["cost"]) > 60:
+        bill_min["time"] = bill_min["time"][1:]
+        bill_min["cost"] = bill_min["cost"][1:]
     bill_db.update_one({"frequency": 0},{"$set":{"time":bill_min["time"]}})
     bill_db.update_one({"frequency": 0},{"$set":{"cost":bill_min["cost"]}})
-    if len(bill_min["cost"]) > 60:
-        bill_min["cost"] = bill_min["cost"] [1:]
-    if time[1] == '00':
-        bill_hour["time"].append(bill_hour["time"][-1]+1)
+    if time[2][:2] == '00' :
+        bill_hour["time"].append(clock)
         bill_hour["cost"].append(bill_min["cost"][-1])
         if len(bill_hour["cost"]) > 60:
-            bill_hour["cost"] = bill_hour["cost"] [1:]
+            bill_hour["time"] = bill_hour["time"][1:]
+            bill_hour["cost"] = bill_hour["cost"][1:]
         bill_db.update_one({"frequency": 1},{"$set":{"time":bill_hour["time"]}})
         bill_db.update_one({"frequency": 1},{"$set":{"cost":bill_hour["cost"]}})
-    if time[0][-2:] == '00':
-        bill_day["time"].append(bill_day["time"][-1]+1)
+    if time[1] == '00':
+        bill_day["time"].append((day,clock))
         bill_day["cost"].append(bill_hour["cost"][-1])
         if len(bill_day["cost"]) > 24:
-            bill_day["cost"] = bill_day["cost"] [1:]
+            bill_day["time"] = bill_day["time"][1:]
+            bill_day["cost"] = bill_day["cost"][1:]
         bill_db.update_one({"frequency": 2},{"$set":{"time":bill_day["time"]}})
         bill_db.update_one({"frequency": 2},{"$set":{"cost":bill_day["cost"]}})
-    l = 60
-    if frequency == 2:
-        l = 24
-    cost = [bill_min["time"],bill_hour["time"],bill_day["time"]]
-    size = list(range(l))
+    l = [bill_min["time"],bill_hour["time"],bill_day["time"]]
+    cost = [bill_min["cost"],bill_hour["cost"],bill_day["cost"]]
     my_get = {
-        "time" : l,
+        "time" : l[frequency],
         "cost" : cost[frequency]
     }
     return {'result': my_get}
 
 @app.route('/people_graph', methods=['GET'])
 @cross_origin()
-def bill():
-    frequency = request.args
+def peple():
+    frequency = int(request.args.get('f'))
     time = str(datetime.now()).split(':')
+    day = str(datetime.now()).split()[0]
+    clock = str(datetime.now()).split()[1].split('.')[0]
     graph_min = graph_db.find_one({"frequency": 0})
     graph_hour = graph_db.find_one({"frequency": 1})
     graph_day = graph_db.find_one({"frequency": 2})
-    active_room = room_info_db.find({"status":1})
-    sum =0
+    active_room = room_info_db.find({"Status":1})
+    sum1 =0
     for ele in active_room:
-        sum+=1
-    graph_min["time"].append(graph_min["time"][-1]+1)
-    graph_min["people"].append(sum)
-    graph_db.update_one({"frequency": 0},{"$set":{"people":graph_min["people"]}})
+        sum1+=1
+    graph_min["time"].append(clock)
+    graph_min["people"].append(sum1)
     if len(graph_min["people"]) > 60:
+        graph_min["time"] = graph_min['time'] [1:]
         graph_min["people"] = graph_min["people"] [1:]
-    if time[1] == '00':
-        graph_hour["time"].append(graph_hour["time"][-1]+1)
+    graph_db.update_one({"frequency": 0},{"$set":{"time":graph_min["time"]}})
+    graph_db.update_one({"frequency": 0},{"$set":{"people":graph_min["people"]}})
+    if time[2][:2] == '00':
+        graph_hour["time"].append(clock)
         graph_hour["people"].append(sum(graph_min["people"])/len(graph_min["people"]))
         if len(graph_hour["people"]) > 60:
+            graph_hour["time"] = graph_hour["time"][1:]
             graph_hour["people"] = graph_hour["people"] [1:]
+        graph_db.update_one({"frequency": 1},{"$set":{"time":graph_hour["time"]}})
         graph_db.update_one({"frequency": 1},{"$set":{"people":graph_hour["people"]}})
-    if time[0][-2:] == '00':
-        graph_day["time"].append(graph_day["time"][-1]+1)
+    if time[1] == '00':
+        graph_day["time"].append((day,clock))
         graph_day["people"].append(sum(graph_hour["people"])/len(graph_hour["people"]))
         if len(graph_day["people"]) > 24:
+            graph_day["time"] = graph_day["time"] [1:]
             graph_day["people"] = graph_day["people"] [1:]
+        graph_db.update_one({"frequency": 2},{"$set":{"time":graph_day["time"]}})
         graph_db.update_one({"frequency": 2},{"$set":{"people":graph_day["people"]}})
-    l = 60
-    if frequency == 2:
-        l = 24
+    l = [graph_min["time"],graph_hour["time"],graph_day["time"]]
     people = [graph_min["people"],graph_hour["people"],graph_day["people"]]
-    size = list(range(l))
     my_get = {
-        "time" : l,
+        "time" : l[frequency],
         "people" : people[frequency]
     }
     return {'result': my_get}
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port='3000', debug=True)
+    app.run(host='0.0.0.0', port='3001', debug=True)
 
