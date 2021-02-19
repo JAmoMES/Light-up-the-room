@@ -198,6 +198,150 @@ function status2_set_light_off() {
     close(2);
 }
 
+let status1 = null;
+let red1 = null;
+let green1 = null;
+let blue1 = null;
+let white1 = null;
+
+let status2 = null;
+let red2 = null;
+let green2 = null;
+let blue2 = null;
+let white2 = null;
+
+function getStatusUpdate1(){
+    
+    url = "http://158.108.182.18:3000/switch?ID=1"
+    return fetch(url, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+    })
+    .then((data) => data.json())
+    .then((result) => {
+        status1 = result.result.Status
+        red1 = result.result.r
+        green1 = result.result.g
+        blue1 = result.result.b
+        white1 = result.result.w
+    })
+}
+
+function getStatusUpdate2(){
+    
+    url = "http://158.108.182.18:3000/switch?ID=2"
+    return fetch(url, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+    })
+    .then((data) => data.json())
+    .then((result) => {
+        status2 = result.result.Status
+        red2 = result.result.r
+        green2 = result.result.g
+        blue2 = result.result.b
+        white2 = result.result.w
+    })
+}
+
+function update1(){
+
+    if (status1 == 0){
+        document.getElementById("status1").style.background = "grey";
+    }
+
+    if (status1 == 1) {
+        document.getElementById("status1_text").innerHTML = "ON";
+        document.getElementById("status1").style.background = "yellow";
+    }
+
+    if (white1 == 0){
+        document.getElementById("w1").style.background = "grey";
+    }
+
+    if (white1 == 1) {
+        document.getElementById("w1").style.background = "white";
+    }
+
+    if (red1 == 0){
+        document.getElementById("r1").style.background = "grey";
+    }
+
+    if (red1 == 1) {
+        document.getElementById("r1").style.background = "red";
+    }
+
+    if (green1 == 0) {
+        document.getElementById("g1").style.background = "grey";
+    }
+
+    if (green1 == 1) {
+        document.getElementById("g1").style.background = "green";
+    }
+
+    if (blue1 == 0) {
+        document.getElementById("b1").style.background = "grey";
+    }
+
+    if (blue1 == 1) {
+        document.getElementById("b1").style.background = "blue";
+    }
+}
+
+function update2(){
+
+    if (status2 == 0){
+        document.getElementById("status2").style.background = "grey";
+    }
+
+    if (status2 == 1) {
+        document.getElementById("status2_text").innerHTML = "ON";
+        document.getElementById("status2").style.background = "yellow";
+    }
+
+    if (white2 == 0){
+        document.getElementById("w2").style.background = "grey";
+    }
+
+    if (white2 == 1) {
+        document.getElementById("w2").style.background = "white";
+    }
+
+    if (red2 == 0){
+        document.getElementById("r2").style.background = "grey";
+    }
+
+    if (red2 == 1) {
+        document.getElementById("r2").style.background = "red";
+    }
+
+    if (green2 == 0) {
+        document.getElementById("g2").style.background = "grey";
+    }
+
+    if (green2 == 1) {
+        document.getElementById("g2").style.background = "green";
+    }
+
+    if (blue2 == 0) {
+        document.getElementById("b2").style.background = "grey";
+    }
+
+    if (blue2 == 1) {
+        document.getElementById("b2").style.background = "blue";
+    }
+}
+
+
+getStatusUpdate1().then(() => {
+    update1();
+})
+
+getStatusUpdate2().then(() => {
+    update2();
+})
+
+
 
 document.getElementById("turn_on1").onclick = status1_set_light_on;
 document.getElementById("turn_off1").onclick = status1_set_light_off;
@@ -206,5 +350,5 @@ document.getElementById("turn_on2").onclick = status2_set_light_on;
 document.getElementById("turn_off2").onclick = status2_set_light_off;
 
 
-checkStatus(1);
+
 
