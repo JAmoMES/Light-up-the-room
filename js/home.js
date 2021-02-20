@@ -278,42 +278,42 @@ function update1(){
 
     if (white1 == 0){
         document.getElementById("w1").style.background = grey_color;
-        ws1 = false;
+        ws1.checked = false;
     }
 
     if (white1 == 1) {
         document.getElementById("w1").style.background = white_color;
-        ws1 = true;
+        ws1.checked = true;
     }
 
     if (red1 == 0){
         document.getElementById("r1").style.background = grey_color;
-        rs1 = false;
+        rs1.checked = false;
     }
 
     if (red1 == 1) {
         document.getElementById("r1").style.background = red_color;
-        rs1 = true;
+        rs1.checked = true;
     }
 
     if (green1 == 0) {
         document.getElementById("g1").style.background = grey_color;
-        gs1 = false;
+        gs1.checked = false;
     }
 
     if (green1 == 1) {
         document.getElementById("g1").style.background = green_color;
-        gs1 = true;
+        gs1.checked = true;
     }
 
     if (blue1 == 0) {
         document.getElementById("b1").style.background = grey_color;
-        bs1 = false;
+        bs1.checked = false;
     }
 
     if (blue1 == 1) {
         document.getElementById("b1").style.background = blue_color;
-        bs1 = true;
+        bs1.checked = true;
     }
 }
 
@@ -335,42 +335,42 @@ function update2(){
 
     if (white2 == 0){
         document.getElementById("w2").style.background = grey_color;
-        ws2 = false;
+        ws2.checked = false;
     }
 
     if (white2 == 1) {
         document.getElementById("w2").style.background = white_color;
-        ws2 = true;
+        ws2.checked = true;
     }
 
     if (red2 == 0){
         document.getElementById("r2").style.background = grey_color;
-        rs2 = false;
+        rs2.checked = false;
     }
 
     if (red2 == 1) {
         document.getElementById("r2").style.background = red_color;
-        rs2 = true;
+        rs2.checked = true;
     }
 
     if (green2 == 0) {
         document.getElementById("g2").style.background = grey_color;
-        gs2 = false;
+        gs2.checked = false;
     }
 
     if (green2 == 1) {
         document.getElementById("g2").style.background = green_color;
-        gs2 = true;
+        gs2.checked = true;
     }
 
     if (blue2 == 0) {
         document.getElementById("b2").style.background = grey_color;
-        bs2 = false;
+        bs2.checked = false;
     }
 
     if (blue2 == 1) {
         document.getElementById("b2").style.background = blue_color;
-        bs2 = true;
+        bs2.checked = true;
     }
 }
 

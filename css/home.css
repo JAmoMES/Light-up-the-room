@@ -212,3 +212,14 @@ header .jumbotron{
     margin-top: -70px;
 
 }
+
+header p{
+    background-color: rgba(136, 197, 233, 0.5);
+    font-size: 30px;
+    color:rgb(224, 26, 26);
+    position: absolute;
+    margin-left: 600px;
+    margin-top: 20px;
+    visibility: hidden;
+    
+}
