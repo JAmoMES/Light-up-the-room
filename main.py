@@ -325,6 +325,16 @@ def people_schedule():
         graph_db.update_one({"frequency": 2},{"$set":{"people":graph_day["people"]}})
 
 
+#new by mark
+@app.route('/people', methods=['GET'])
+@cross_origin()
+def people_find():
+    query = people_db.find()
+    res = []
+    for data in query:
+        res.append(data)
+    return {"result": res}
+
 if __name__ == "__main__":
     scheduler.add_job(id = 'Scheduled Task', func=bill_schedule, trigger="interval", seconds=2.0011)
     scheduler.add_job(id = 'Scheduled Task2', func=people_schedule, trigger="interval", seconds=2.0011)
