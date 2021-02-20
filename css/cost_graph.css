@@ -15,24 +15,64 @@ header .jumbotron{
     
 }
 
-.container{
+p{
+    background-color: rgba(132, 140, 245, 0.4);
     text-align: center;
+    width: 250px;
+    font-size: 50px;
+    margin-left: 650px;
 }
-.container-info{
-    display: inline-block;
-    text-align:  center;
-    margin-right: 300px;
-    width: 200px;
-    height: 300px;
-    
-}
-
 
 .container-graph{
-    display: inline-block;
+    position: absolute;
     text-align:  center;
+    margin-right: 100px;
+    margin-top: 13px;
     width: 400px;
     height: 500px;
     
 }
 
+.graph{
+    margin-right: 100px;
+    margin-top: 1px;
+    width: 400px;
+    height: 500px;
+    
+}
+
+.container-graph-info{
+    background-color: rgba(184, 184, 184, 0.4);
+    position: absolute;
+    display: inline-block;
+    text-align:  center;
+    margin-left: 950px;
+    margin-top: 50px;
+    width: 400px;
+    height: 450px;
+}
+
+.graph-time-info{
+    margin-top: 25px;
+}
+
+.graph-cost-info{
+    margin-top: 120px;
+}
+
+
+#time-label{
+    font-size: 60px;
+}
+
+#cost-label{
+    font-size: 60px;
+}
+
+#cost-of-graph{
+    margin-top: 25px;
+}
+
+#time-of-graph{
+    margin-top: 25px
+}
