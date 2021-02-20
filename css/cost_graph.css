@@ -16,6 +16,7 @@ header .jumbotron{
 }
 
 p{
+    position: absolute;
     background-color: rgba(132, 140, 245, 0.4);
     text-align: center;
     width: 250px;
@@ -27,7 +28,7 @@ p{
     position: absolute;
     text-align:  center;
     margin-right: 100px;
-    margin-top: 13px;
+    margin-top: 100px;
     width: 400px;
     height: 500px;
     
@@ -47,7 +48,7 @@ p{
     display: inline-block;
     text-align:  center;
     margin-left: 950px;
-    margin-top: 50px;
+    margin-top: 125px;
     width: 400px;
     height: 450px;
 }
@@ -74,5 +75,24 @@ p{
 }
 
 #time-of-graph{
-    margin-top: 25px
+    margin-top: 25px;
+}
+
+.button-container{
+    position: absolute;
+    margin-left: 200px;
+    margin-top: 30px;
+}
+.button-container .sec-button{
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.button-container .min-button{
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.button-container .hour-button{
+    display: inline-block;
 }

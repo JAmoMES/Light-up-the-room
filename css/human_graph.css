@@ -1,0 +1,61 @@
+body{
+    background-image: url("images/bg.jpg");
+    background-size: cover;
+}
+
+header{
+    margin-top: 70px;
+    text-align: center;
+    
+}
+
+header .jumbotron{
+    background-color: rgba(184, 184, 184, 0.4);
+    height: 80px;
+    
+}
+
+p{
+    background-color: rgba(132, 140, 245, 0.4);
+    width: 400px;
+    text-align: center;
+    font-size: 50px;
+    margin-left: 570px;
+}
+
+.graph{
+    position: absolute;
+}
+
+.container-graph-info{
+    background-color: rgba(184, 184, 184, 0.4);
+    position: absolute;
+    text-align:  center;
+    margin-left: 950px;
+    width: 450px;
+    height: 498px;
+}
+
+.graph-time-info{
+    margin-top: 25px;
+}
+
+.graph-people-info{
+    margin-top: 120px;
+}
+
+
+#time-label{
+    font-size: 60px;
+}
+
+#people-label{
+    font-size: 60px;
+}
+
+#people-of-graph{
+    margin-top: 25px;
+}
+
+#people-of-graph{
+    margin-top: 25px;
