@@ -1,0 +1,55 @@
+body{
+    background-image: url("images/bg.jpg");
+    background-size: cover;
+}
+
+header{
+    margin-top: 70px;
+    text-align: center;
+    
+}
+
+header .jumbotron{
+    background-color: rgba(184, 184, 184, 0.4);
+    height: 80px;
+    
+}
+
+.timegraph{
+    background-color: rgba(132, 140, 245, 0.4);
+    text-align: center;
+    width: 280px;
+    font-size: 50px;
+    margin-left: 630px;
+}
+
+.date{
+    text-align: center;
+}
+
+.container{
+    position: absolute;
+}
+
+.container-info{  
+    display: inline-block;
+    margin-left: 75px;
+    width: 200px;
+    height: 300px;
+    
+}
+
+.container-graph{
+    display: inline-block;
+    margin-left: 510px;
+    width: 200px;
+    height: 300px;
+    
+}
+
+.date{
+    background-color: rgba(184, 184, 184, 0.6);
+    font-size: 30px;
+    width: 500px;
+    margin-left: 525px;
+}

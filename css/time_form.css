@@ -1,0 +1,76 @@
+body{
+    background-image: url("images/bg.jpg");
+    background-size: cover;
+}
+
+header{
+    margin-top: 70px;
+    text-align: center;
+    
+}
+
+header .jumbotron{
+    background-color: rgba(184, 184, 184, 0.4);
+    height: 80px;
+    
+}
+
+.container{
+    text-align: center;
+  
+}
+
+.container .form-container{
+    background-color: rgba(255, 255, 255, 0.8);
+    font-size: 25px;
+    text-align:  center;
+    margin-left: 460px;
+    margin-top: 30px;
+    width: 400px;
+    height: 350px;
+}
+
+.container-form-output{
+    background-color: rgba(184, 184, 184, 0.4);
+    text-align:  center;
+    margin-left: 428px;
+    margin-top: 50px;
+    width: 700px;
+    height: 100px;
+    
+}
+
+
+.container .form-container .form-header{
+    width: 400px;
+    margin-bottom: 50px;
+}
+
+.container #check1{
+    margin-left: 60px;
+}
+.container #check2{
+    margin-left: 60px;
+}
+.container #check3{
+    margin-left: 60px;
+}
+
+.container .form-check-label1{
+    margin-left: -70px;
+}
+
+.container .form-check-label2{
+    margin-left: -70px;
+}
+
+
+.container .form-check-label3{
+    margin-left: -70px;
+}
+
+.output{
+    font-size: 30px;
+    margin-top: 25px;
+}
+

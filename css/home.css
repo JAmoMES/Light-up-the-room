@@ -1,0 +1,223 @@
+
+body{
+    background-image: url("images/bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+}
+
+header{
+    margin-top: 70px;
+    text-align: center;
+    
+}
+
+
+header h1{
+    margin-top: 70px;
+    text-align: center;
+    
+}
+
+header .jumbotron{
+    background-color: rgba(184, 184, 184, 0.4);
+    height: 80px;
+    
+}
+
+.container-fluid{
+    margin-top: 20px;
+    font-size: 40px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.container-fluid .light1text{
+    margin-right: 400px;
+    background-color: rgba(132, 140, 245, 0.4);
+}
+
+.container-fluid .light2text{
+    background-color: rgba(132, 140, 245, 0.4);
+}
+
+.showswitch{
+    white-space: nowrap;
+    text-align: center;
+}
+
+.switch1,.switch2{
+    display: inline-block;
+}
+
+.showswitch .switch1{
+    background-color: rgba(107, 107, 107, 0.85); 
+    width: 250px;
+    height: 350px;
+    margin-right: 250px;
+    margin-top: 30px;
+}
+
+.showswitch .switch2{
+    background-color: rgba(107, 107, 107, 0.85);
+    width: 250px;
+    height: 350px;
+    margin-top: 30px;
+}
+
+.showswitch p{
+    margin-top: 120px;
+    font-size: 60px;
+}
+
+
+.container-btn{
+    text-align: center;
+    margin-top: 50px;
+}
+
+#btn1{
+    margin-right: 450px;
+}
+
+.color-container1{
+    position: absolute;
+    white-space: break-spaces;
+    margin-left: 300px;
+    margin-top: 30px;
+}
+
+.color-container1 .color-container-white{
+    text-align: center;
+    padding-top: 12px;
+    background-color: rgba(107, 107, 107, 0.7);
+    width: 50px;
+    height: 50px;
+    
+}
+
+.color-container1 .color-container-red{
+    text-align: center;
+    padding-top: 12px;
+    background-color: rgba(107, 107, 107, 0.7);
+    width: 50px;
+    height: 50px;
+    
+}
+
+.color-container1 .color-container-green{
+    text-align: center;
+    padding-top: 12px;
+    background-color: rgba(107, 107, 107, 0.7);
+    width: 50px;
+    height: 50px;
+    
+}
+
+
+.color-container1 .color-container-blue{
+    text-align: center;
+    padding-top: 12px;
+    background-color: rgba(107, 107, 107, 0.7);
+    width: 50px;
+    height: 50px;
+}
+
+.color-container1 .color-container-white .text-container-white{
+    margin-top: -70px;
+
+}
+
+.color-container1 .color-container-red .text-container-red{
+    margin-top: -70px;
+
+}
+
+
+.color-container1 .color-container-green .text-container-green{
+    margin-top: -88px;
+
+}
+
+
+.color-container1 .color-container-blue .text-container-blue{
+    margin-top: -70px;
+
+}
+
+
+.color-container2{
+    position: absolute;
+    white-space: break-spaces;
+    margin-left: 1185px;
+    margin-top: 30px;
+}
+
+.color-container2 .color-container-white{
+    text-align: center;
+    padding-top: 12px;
+    background-color: rgba(107, 107, 107, 0.7);
+    width: 50px;
+    height: 50px;
+    
+}
+
+.color-container2 .color-container-red{
+    text-align: center;
+    padding-top: 12px;
+    background-color: rgba(107, 107, 107, 0.7);
+    width: 50px;
+    height: 50px;
+    
+}
+
+.color-container2 .color-container-green{
+    text-align: center;
+    padding-top: 12px;
+    background-color: rgba(107, 107, 107, 0.7);
+    width: 50px;
+    height: 50px;
+    
+}
+
+
+.color-container2 .color-container-blue{
+    text-align: center;
+    padding-top: 12px;
+    background-color: rgba(107, 107, 107, 0.7);
+    width: 50px;
+    height: 50px;
+}
+
+.color-container2 .color-container-white .text-container-white{
+    margin-top: -70px;
+
+}
+
+.color-container2 .color-container-red .text-container-red{
+    margin-top: -70px;
+
+}
+
+
+.color-container2 .color-container-green .text-container-green{
+    margin-top: -88px;
+
+}
+
+
+.color-container2 .color-container-blue .text-container-blue{
+    margin-top: -70px;
+
+}
+
+header p{
+    background-color: rgba(136, 197, 233, 0.5);
+    font-size: 30px;
+    color:rgb(224, 26, 26);
+    position: absolute;
+    margin-left: 600px;
+    margin-top: 20px;
+    visibility: hidden;
+    
+}
