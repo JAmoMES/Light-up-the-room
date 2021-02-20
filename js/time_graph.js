@@ -41,7 +41,11 @@ function drawChart() {
 
     var options = {
         //fontName: 'LucidaBrightRegular',
-        title: 'Number of people use this room',
+        title: 'Current amount of people in the room',
+        titleTextStyle:{
+            fontSize: 22
+        },
+        fontSize: 18,
         height: 400,
         width: 650,
         colors: ['#FFCC00', '#FF9999', '#FF6600'],
@@ -94,7 +98,11 @@ function drawChart2() {
 
     var options2 = {
         //fontName: 'LucidaBrightRegular',
-        title: 'Time that people use this room',
+        title: 'Cumulated time of room used',
+        titleTextStyle:{
+            fontSize: 22
+        },
+        fontSize: 18,
         height: 400,
         width: 650,
         colors: ['#FFCC00', '#FF9999', '#FF6600'],
