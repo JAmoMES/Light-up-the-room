@@ -189,7 +189,6 @@ def bill():
     return {'result': my_get}
 
 def bill_schedule():
-    #print(datetime.now())
     time = str(datetime.now()).split(':')
     day = str(datetime.now()).split()[0]
     clock = str(datetime.now()).split()[1].split('.')[0]
@@ -219,9 +218,9 @@ def bill_schedule():
 
 @app.route('/people_graph', methods=['GET'])
 @cross_origin()
-def peple():
+def people():
     frequency = int(request.args.get('f'))
-    people= people_db.find_one({"frequency": frequency})
+    people = graph_db.find_one({"frequency": frequency})
     my_get = {
         "time" : people["time"],
         "people" : people["people"]
@@ -229,7 +228,6 @@ def peple():
     return {'result': my_get}
 
 def people_schedule():
-    print(datetime.now())
     time = str(datetime.now()).split(':')
     day = str(datetime.now()).split()[0]
     clock = str(datetime.now()).split()[1].split('.')[0]
@@ -263,7 +261,7 @@ def people_schedule():
             graph_day["people"] = graph_day["people"] [1:]
         graph_db.update_one({"frequency": 2},{"$set":{"time":graph_day["time"]}})
         graph_db.update_one({"frequency": 2},{"$set":{"people":graph_day["people"]}})
-
+    
 
 #new by mark
 @app.route('/people', methods=['GET'])
@@ -283,6 +281,7 @@ def people_find():
     return {"result": res}
 
 if __name__ == "__main__":
-    scheduler.add_job(id = 'Scheduled Task', func=bill_schedule, trigger="interval", seconds=2.0011)
-    scheduler.add_job(id = 'Scheduled Task2', func=people_schedule, trigger="interval", seconds=2.0011)
-    app.run(host='0.0.0.0', port='3001', debug=True)
+    scheduler.add_job(id = 'Scheduled Task', func=bill_schedule, trigger="interval", seconds=1)
+    scheduler.add_job(id = 'Scheduled Task2', func=people_schedule, trigger="interval", seconds=1)
+    scheduler.start()
+    app.run(host='0.0.0.0', port='3000', debug=True)
