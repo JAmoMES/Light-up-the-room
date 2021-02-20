@@ -1,3 +1,51 @@
+let full1 = null;
+let full2 = null;
+
+function getFull1(){
+    
+    url = "http://158.108.182.18:3000/switch?ID=1"
+    return fetch(url, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+    })
+    .then((data) => data.json())
+    .then((result) => {
+        full1 = result.result.Status
+    })
+}
+
+function getFull2(){
+    
+    url = "http://158.108.182.18:3000/switch?ID=2"
+    return fetch(url, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+    })
+    .then((data) => data.json())
+    .then((result) => {
+        full2 = result.result.Status
+    })
+}
+
+let f1 = false;
+let f2 = false;
+
+function checkFull(){
+    getFull1().then(() => {
+        if(full1 == 1){
+            f1 = true;
+        }
+        getFull2().then(() => {
+            if(full2 == 1){
+                f2 = true;
+            }
+            if (f1 == true && f2 == true){
+                document.getElementById("header_alert").style.visibility = "visible"
+            }
+        })
+    })
+}
+
 function map_color(x){
     if(x == false){
         return 0;
@@ -125,6 +173,7 @@ function status1_set_light_on() {
 
     //else if(checkStatus(1) != 1){
     open_new(map_color(red1), map_color(green1), map_color(blue1), map_color(white1), 1, 1);
+ 
     //}
 
 }
@@ -148,6 +197,7 @@ function status1_set_light_off() {
     bs1.checked = false;
 
     close(1);
+
 }
 
 function status2_set_light_on() {
@@ -191,6 +241,7 @@ function status2_set_light_on() {
 
     // else if(checkStatus(2) != 1){
     open_new(map_color(red2), map_color(green2), map_color(blue2), map_color(white2), 1, 2);
+
     // }
 }
 
@@ -212,6 +263,7 @@ function status2_set_light_off() {
     gs2.checked = false;
     bs2.checked = false;
     close(2);
+  
 }
 
 let status1 = null;
@@ -374,53 +426,7 @@ function update2(){
     }
 }
 
-let full1 = null;
-let full2 = null;
 
-function getFull1(){
-    
-    url = "http://158.108.182.18:3000/switch?ID=1"
-    return fetch(url, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-    })
-    .then((data) => data.json())
-    .then((result) => {
-        full1 = result.result.Status
-    })
-}
-
-function getFull2(){
-    
-    url = "http://158.108.182.18:3000/switch?ID=2"
-    return fetch(url, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-    })
-    .then((data) => data.json())
-    .then((result) => {
-        full2 = result.result.Status
-    })
-}
-
-let f1 = false;
-let f2 = false;
-
-function checkFull(){
-    getFull1().then(() => {
-        if(full1 == 1){
-            f1 = true;
-        }
-        getFull2().then(() => {
-            if(full2 == 1){
-                f2 = true;
-            }
-            if (f1 == true && f2 == true){
-                document.getElementById("header_alert").style.visibility = "visible"
-            }
-        })
-    })
-}
 
 getStatusUpdate1().then(() => {
     update1();
