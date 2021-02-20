@@ -332,7 +332,14 @@ def people_find():
     query = people_db.find()
     res = []
     for data in query:
-        res.append(data)
+        tmp = {
+                "total_people": date["total_people"],
+                "total_used_time": date["total_used_time"],
+                "date": date["date"],
+                "time": date["time"],
+                "avg_people": date["avg_people"]
+              }
+        res.append(tmp)
     return {"result": res}
 
 if __name__ == "__main__":
