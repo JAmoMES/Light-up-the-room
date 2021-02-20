@@ -48,9 +48,9 @@ p{
     display: inline-block;
     text-align:  center;
     margin-left: 950px;
-    margin-top: 125px;
+    margin-top: 90px;
     width: 400px;
-    height: 450px;
+    height: 520px;
 }
 
 .graph-time-info{
@@ -58,7 +58,7 @@ p{
 }
 
 .graph-cost-info{
-    margin-top: 120px;
+    margin-top: 100px;
 }
 
 
