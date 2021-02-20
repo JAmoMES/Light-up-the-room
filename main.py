@@ -248,11 +248,17 @@ def people_find():
     query = people_db.find()
     res = []
     for data in query:
-        res.append(data)
+        tmp = {
+                "total_people": data["total_people"],
+                "total_used_time": data["total_used_time"],
+                "date": data["date"],
+                "time": data["time"],
+                "avg_people": data["avg_people"]
+              }
+        res.append(tmp)
     return {"result": res}
 
 if __name__ == "__main__":
     scheduler.add_job(id = 'Scheduled Task', func=bill_schedule, trigger="interval", seconds=2.0011)
     scheduler.add_job(id = 'Scheduled Task2', func=people_schedule, trigger="interval", seconds=2.0011)
-    scheduler.start()
     app.run(host='0.0.0.0', port='3001', debug=True)
