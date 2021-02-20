@@ -374,16 +374,63 @@ function update2(){
     }
 }
 
+let full1 = null;
+let full2 = null;
+
+function getFull1(){
+    
+    url = "http://158.108.182.18:3000/switch?ID=1"
+    return fetch(url, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+    })
+    .then((data) => data.json())
+    .then((result) => {
+        full1 = result.result.Status
+    })
+}
+
+function getFull2(){
+    
+    url = "http://158.108.182.18:3000/switch?ID=2"
+    return fetch(url, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+    })
+    .then((data) => data.json())
+    .then((result) => {
+        full2 = result.result.Status
+    })
+}
+
+let f1 = false;
+let f2 = false;
+
+function checkFull(){
+    getFull1().then(() => {
+        if(full1 == 1){
+            f1 = true;
+        }
+        getFull2().then(() => {
+            if(full2 == 1){
+                f2 = true;
+            }
+            if (f1 == true && f2 == true){
+                document.getElementById("header_alert").style.visibility = "visible"
+            }
+        })
+    })
+}
 
 getStatusUpdate1().then(() => {
     update1();
+    checkFull();
 })
 
 getStatusUpdate2().then(() => {
     update2();
+    checkFull();
 })
-
-
 
 document.getElementById("turn_on1").onclick = status1_set_light_on;
 document.getElementById("turn_off1").onclick = status1_set_light_off;
