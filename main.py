@@ -161,11 +161,10 @@ def switch_find():
 
  #calculate elec bill (ฮอนหาสูตรคิดค่าไฟมาใส่ให้หน่อย) time in sec
 def cal_bill(time):
-    cost = time
-    #cost = ...
+    cost = (0.032*time*nlight)
     return cost
 
- #James
+#James
 @app.route('/elecbill', methods=['GET'])
 @cross_origin()
 def bill():
