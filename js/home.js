@@ -72,48 +72,49 @@ function close(id) {
       .catch((error) => console.log("error", error));
 }
 
+// switch color
+let grey_color = "rgba(107, 107, 107, 0.7)";
+let yellow_color = "rgba(255, 255, 0, 0.8)";
+let white_color = "rgba(255, 255, 255, 0.8)";
+let red_color =  "rgba(255, 0, 0, 0.8)";
+let green_color = "rgba(0, 255, 0, 0.8)";
+let blue_color = "rgba(0, 0, 255, 0.8)";
 
 function status1_set_light_on() {
 
     document.getElementById("status1_text").innerHTML = "ON";
-    document.getElementById("status1").style.background = "yellow";
+    document.getElementById("status1").style.background = yellow_color;
 
-    white1 = document.getElementById("white1").checked
-    red1 = document.getElementById("red1").checked
-    green1 = document.getElementById("green1").checked
-    blue1 = document.getElementById("blue1").checked
+    white1 = document.getElementById("whiteswitch1").checked
+    red1 = document.getElementById("redswitch1").checked
+    green1 = document.getElementById("greenswitch1").checked
+    blue1 = document.getElementById("blueswitch1").checked
 
-    if (white1 == false){
-        document.getElementById("w1").style.background = "grey";
+    if (white1 == false && red1 == false && green1 == false && blue1 == false){
+        document.getElementById("w1").style.background = white_color; 
+        white1 = true;
+        document.getElementById("whiteswitch1").checked = true;
     }
 
-    if (white1 == true) {
-        document.getElementById("w1").style.background = "white";
-    }
+    else{
+    
+        if (white1 == true) {
+            document.getElementById("w1").style.background = white_color;
+        }
 
-    if (red1 == false){
-        document.getElementById("r1").style.background = "grey";
+        if (red1 == true) {
+            document.getElementById("r1").style.background = red_color;
+        }
+    
+        if (green1 == true) {
+            document.getElementById("g1").style.background = green_color;
+        }
+    
+        if (blue1 == true) {
+            document.getElementById("b1").style.background = blue_color;
+        }
     }
-
-    if (red1 == true) {
-        document.getElementById("r1").style.background = "red";
-    }
-
-    if (green1 == false) {
-        document.getElementById("g1").style.background = "grey";
-    }
-
-    if (green1 == true) {
-        document.getElementById("g1").style.background = "green";
-    }
-
-    if (blue1 == false) {
-        document.getElementById("b1").style.background = "grey";
-    }
-
-    if (blue1 == true) {
-        document.getElementById("b1").style.background = "blue";
-    }
+    
 
     // update database
 
@@ -130,11 +131,22 @@ function status1_set_light_on() {
 
 function status1_set_light_off() {
     document.getElementById("status1_text").innerHTML = "OFF";
-    document.getElementById("status1").style.background = "grey";
-    document.getElementById("w1").style.background = "grey";
-    document.getElementById("r1").style.background = "grey";
-    document.getElementById("g1").style.background = "grey";
-    document.getElementById("b1").style.background = "grey";
+    document.getElementById("status1").style.background = grey_color;
+    document.getElementById("w1").style.background = grey_color;
+    document.getElementById("r1").style.background = grey_color;
+    document.getElementById("g1").style.background = grey_color;
+    document.getElementById("b1").style.background = grey_color;
+    
+    ws1 = document.getElementById("whiteswitch1");
+    rs1 = document.getElementById("redswitch1");
+    gs1 = document.getElementById("greenswitch1");
+    bs1 = document.getElementById("blueswitch1");
+
+    ws1.checked = false;
+    rs1.checked = false;
+    gs1.checked = false;
+    bs1.checked = false;
+
     close(1);
 }
 
@@ -142,42 +154,36 @@ function status2_set_light_on() {
     document.getElementById("status2_text").innerHTML = "ON";
     document.getElementById("status2").style.background = "yellow";
 
-    white2 = document.getElementById("white2").checked
-    red2 = document.getElementById("red2").checked
-    green2 = document.getElementById("green2").checked
-    blue2 = document.getElementById("blue2").checked
+    white2 = document.getElementById("whiteswitch2").checked
+    red2 = document.getElementById("redswitch2").checked
+    green2 = document.getElementById("greenswitch2").checked
+    blue2 = document.getElementById("blueswitch2").checked
 
-    if (white2 == false) {
-        document.getElementById("w2").style.background = "grey";
+    if (white2 == false && red2 == false && green2 == false && blue2 == false){
+        document.getElementById("w2").style.background = white_color; 
+        white2 = true;
+        document.getElementById("whiteswitch2").checked = true;
     }
 
-    if (white2 == true) {
-        document.getElementById("w2").style.background = "white";
-    }
+    else{
+    
+        if (white2 == true) {
+            document.getElementById("w2").style.background = white_color;
+        }
 
-    if (red2 == false) {
-        document.getElementById("r2").style.background = "grey";
+        if (red2 == true) {
+            document.getElementById("r2").style.background = red_color;
+        }
+    
+        if (green2 == true) {
+            document.getElementById("g2").style.background = green_color;
+        }
+    
+        if (blue2 == true) {
+            document.getElementById("b2").style.background = blue_color;
+        }
     }
-
-    if (red2 == true) {
-        document.getElementById("r2").style.background = "red";
-    }
-
-    if (green2 == false) {
-        document.getElementById("g2").style.background = "grey";
-    }
-
-    if (green2 == true) {
-        document.getElementById("g2").style.background = "green";
-    }
-
-    if (blue2 == false) {
-        document.getElementById("b2").style.background = "grey";
-    }
-
-    if (blue2 == true) {
-        document.getElementById("b2").style.background = "blue";
-    }
+   
 
     // if(checkStatus(2) == 1){
     //     open_update(red1, green1, blue1, white1, 1, 2);
@@ -190,11 +196,21 @@ function status2_set_light_on() {
 
 function status2_set_light_off() {
     document.getElementById("status2_text").innerHTML = "OFF";
-    document.getElementById("status2").style.background = "grey";
-    document.getElementById("w2").style.background = "grey";
-    document.getElementById("r2").style.background = "grey";
-    document.getElementById("g2").style.background = "grey";
-    document.getElementById("b2").style.background = "grey";
+    document.getElementById("status2").style.background = grey_color;
+    document.getElementById("w2").style.background = grey_color;
+    document.getElementById("r2").style.background = grey_color;
+    document.getElementById("g2").style.background = grey_color;
+    document.getElementById("b2").style.background = grey_color;
+
+    ws2 = document.getElementById("whiteswitch2");
+    rs2 = document.getElementById("redswitch2");
+    gs2 = document.getElementById("greenswitch2");
+    bs2 = document.getElementById("blueswitch2");
+
+    ws2.checked = false;
+    rs2.checked = false;
+    gs2.checked = false;
+    bs2.checked = false;
     close(2);
 }
 
@@ -245,90 +261,116 @@ function getStatusUpdate2(){
 }
 
 function update1(){
+    
+    ws1 = document.getElementById("whiteswitch1");
+    rs1 = document.getElementById("redswitch1");
+    gs1 = document.getElementById("greenswitch1");
+    bs1 = document.getElementById("blueswitch1");
 
     if (status1 == 0){
-        document.getElementById("status1").style.background = "grey";
+        document.getElementById("status1").style.background = grey_color;
     }
 
     if (status1 == 1) {
         document.getElementById("status1_text").innerHTML = "ON";
-        document.getElementById("status1").style.background = "yellow";
+        document.getElementById("status1").style.background = yellow_color;
     }
 
     if (white1 == 0){
-        document.getElementById("w1").style.background = "grey";
+        document.getElementById("w1").style.background = grey_color;
+        ws1 = false;
     }
 
     if (white1 == 1) {
-        document.getElementById("w1").style.background = "white";
+        document.getElementById("w1").style.background = white_color;
+        ws1 = true;
     }
 
     if (red1 == 0){
-        document.getElementById("r1").style.background = "grey";
+        document.getElementById("r1").style.background = grey_color;
+        rs1 = false;
     }
 
     if (red1 == 1) {
-        document.getElementById("r1").style.background = "red";
+        document.getElementById("r1").style.background = red_color;
+        rs1 = true;
     }
 
     if (green1 == 0) {
-        document.getElementById("g1").style.background = "grey";
+        document.getElementById("g1").style.background = grey_color;
+        gs1 = false;
     }
 
     if (green1 == 1) {
-        document.getElementById("g1").style.background = "green";
+        document.getElementById("g1").style.background = green_color;
+        gs1 = true;
     }
 
     if (blue1 == 0) {
-        document.getElementById("b1").style.background = "grey";
+        document.getElementById("b1").style.background = grey_color;
+        bs1 = false;
     }
 
     if (blue1 == 1) {
-        document.getElementById("b1").style.background = "blue";
+        document.getElementById("b1").style.background = blue_color;
+        bs1 = true;
     }
 }
 
 function update2(){
 
+    ws2 = document.getElementById("whiteswitch2");
+    rs2 = document.getElementById("redswitch2");
+    gs2 = document.getElementById("greenswitch2");
+    bs2 = document.getElementById("blueswitch2");
+
     if (status2 == 0){
-        document.getElementById("status2").style.background = "grey";
+        document.getElementById("status2").style.background = grey_color;
     }
 
     if (status2 == 1) {
         document.getElementById("status2_text").innerHTML = "ON";
-        document.getElementById("status2").style.background = "yellow";
+        document.getElementById("status2").style.background = yellow_color;
     }
 
     if (white2 == 0){
-        document.getElementById("w2").style.background = "grey";
+        document.getElementById("w2").style.background = grey_color;
+        ws2 = false;
     }
 
     if (white2 == 1) {
-        document.getElementById("w2").style.background = "white";
+        document.getElementById("w2").style.background = white_color;
+        ws2 = true;
     }
 
     if (red2 == 0){
-        document.getElementById("r2").style.background = "grey";
+        document.getElementById("r2").style.background = grey_color;
+        rs2 = false;
     }
 
     if (red2 == 1) {
-        document.getElementById("r2").style.background = "red";
+        document.getElementById("r2").style.background = red_color;
+        rs2 = true;
     }
 
     if (green2 == 0) {
-        document.getElementById("g2").style.background = "grey";
+        document.getElementById("g2").style.background = grey_color;
+        gs2 = false;
     }
 
     if (green2 == 1) {
-        document.getElementById("g2").style.background = "green";
+        document.getElementById("g2").style.background = green_color;
+        gs2 = true;
     }
 
     if (blue2 == 0) {
-        document.getElementById("b2").style.background = "grey";
+        document.getElementById("b2").style.background = grey_color;
+        bs2 = false;
     }
 
     if (blue2 == 1) {
-        document.getElementById("b2").style.background = "blue";
+        document.getElementById("b2").style.background = blue_color;
+        bs2 = true;
     }
 }
 
