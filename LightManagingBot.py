@@ -305,7 +305,7 @@ async def turn_on(message,room,*args):
     filt = {'ID':int(room),'Time_out' : None}
     auth = collection_room.find_one(filt)
     if auth != None :
-        return await message.channel.send("There are no empty room.")
+        return await message.channel.send("This room is full.")
     myInsert = {
             'Type' : 'Room_info',
             'ID' : int(room),
