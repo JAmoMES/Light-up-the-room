@@ -1,8 +1,8 @@
 function map_color(x){
-    if(x = false){
+    if(x == false){
         return 0;
     }
-    if(x = true){
+    if(x == true){
         return 1;
     }
 }
@@ -37,27 +37,28 @@ function checkStatus(light){
 
 // สร้าง function ไว้ส่งข้อมูล1
 function open_new(r_value, g_value, b_value, w_value, status, id) {
+    console.log("yep")
     fetch("http://158.108.182.18:3000/switch", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ID: id, Status: status, b: 1, g: 1, r: 1, w: 1 }),
+      body: JSON.stringify({ ID: id, Status: status, b: b_value, g: g_value, r: r_value, w: w_value }),
     })
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
 }
 
-// สร้าง function ไว้ส่งข้อมูล2
-function open_update(r_value, g_value, b_value, w_value, status, id) {
-    fetch("http://158.108.182.18:3000/switch", {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ID: id, Status: status, b: 0, g: 1, r: 0, w: 1 }),
-    })
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
-}
+// // สร้าง function ไว้ส่งข้อมูล2
+// function open_update(r_value, g_value, b_value, w_value, status, id) {
+//     fetch("http://158.108.182.18:3000/switch", {
+//       method: "PATCH",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({ ID: id, Status: status, b: b_value, g: g_value, r: r_value, w: w_value }),
+//     })
+//       .then((response) => response.text())
+//       .then((result) => console.log(result))
+//       .catch((error) => console.log("error", error));
+// }
 
 
 function close(id) {
@@ -116,15 +117,14 @@ function status1_set_light_on() {
 
     // update database
 
-    if(checkStatus(1) == 1){
-        console.log("ok")
-        open_update(map_color(red1), map_color(green1), map_color(blue1), map_color(white1), 1, 1);
-    }
+    // if(checkStatus(1) == 1){
+  
+    //     open_update(map_color(red1), map_color(green1), map_color(blue1), map_color(white1), 1, 1);
+    // }
 
-    else if(checkStatus(1) != 1){
-        console.log("not ok")
-        open_new(map_color(red1), map_color(green1), map_color(blue1), map_color(white1), 1, 1);
-    }
+    //else if(checkStatus(1) != 1){
+    open_new(map_color(red1), map_color(green1), map_color(blue1), map_color(white1), 1, 1);
+    //}
 
 }
 
@@ -179,13 +179,13 @@ function status2_set_light_on() {
         document.getElementById("b2").style.background = "blue";
     }
 
-    if(checkStatus(2) == 1){
-        open_update(map_color(red1), map_color(green1), map_color(blue1), map_color(white1), 1, 2);
-    }
+    // if(checkStatus(2) == 1){
+    //     open_update(red1, green1, blue1, white1, 1, 2);
+    // }
 
-    else if(checkStatus(2) != 1){
-        open_new(map_color(red1), map_color(green1), map_color(blue1), map_color(white1), 1, 2);
-    }
+    // else if(checkStatus(2) != 1){
+    open_new(map_color(red2), map_color(green2), map_color(blue2), map_color(white2), 1, 2);
+    // }
 }
 
 function status2_set_light_off() {
