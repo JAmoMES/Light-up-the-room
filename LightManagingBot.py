@@ -270,9 +270,9 @@ async def status(message,*args):
         filt = {'Time_out':None}
         room = collection_room.find(filt)
         room_num = []
-        for i in range(room_size):
+        for i in range(room_size+1):
             room_num.append('Room '+str(i))
-        color_room = ['empty room']*room_size
+        color_room = ['empty room']*(room_size+1)
         for ele in room:
             print(ele)
             if ele["ID"] >= room_size:
@@ -281,7 +281,7 @@ async def status(message,*args):
             if len(color_room[ele["ID"]]) == 0:
                 color_room[ele["ID"]] = 'no light'
             color_room[ele["ID"]] = "light color :" + color_room[ele["ID"]] 
-        status_room = (room_num[0],color_room[0],room_num[1],color_room[1])
+        status_room = (room_num[1],color_room[1],room_num[2],color_room[2])
         embedVar = embed_send(f"Status                                             💡",None,0xFFC2E2,status_room,line=True)
         await message.channel.send(embed=embedVar)
     else:

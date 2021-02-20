@@ -119,20 +119,29 @@ def switch_update_one():
         room_info_db.update_one(filt, updated_content)
         return {'result': 'light changed'}
 
-# @app.route('/switch', methods=['GET'])
-# def switch_find():
-#     query = room_info_db.find().sort("_id", -1).limit(2)
-#     res = []
-#     for data in query:
-#         tmp = {
-#             "ID" : data["ID"],
-#             "r": data["r"],
-#             "g": data["g"],
-#             "b": data["b"],
-#             "w": data["w"]
-#         }
-#         res.append(tmp)
-#     return {"result": res}
+
+@app.route('/switch_hard', methods=['GET'])
+@cross_origin()
+def switch_find_hard():
+    id = request.args.get("ID")
+    filt = {"Status": 1 , "ID": int(id)}
+    data = room_info_db.find_one(filt)
+    res = {
+            "ID" : int(id),
+            "Status" : 0,
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "w": 0
+        }
+    if (data == None):
+        return {"result" : res}
+    res["Status"] = data["Status"]
+    res["r"] = data['r']
+    res["g"] = data['g']
+    res["b"] = data['b']
+    res["w"] = data['w']
+    return res
 
 @app.route('/switch', methods=['GET'])
 @cross_origin()
