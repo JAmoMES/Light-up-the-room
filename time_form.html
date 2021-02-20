@@ -37,32 +37,32 @@
 <!-- --------------------------------------------------------------------------------------- -->
     <div class="container">
        <div class="form-container border border-dark">
-            <form> 
+            <div class=time>
                 <div class="form-header">
                     <h2>Which Population do you want to know?</h2>           
                 </div>
                 <div class="mb-3 form-check" id="check1">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                    <input id = "high" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
                     <label class="form-check-label1" for="exampleRadios1">High Population</label>
                   </div>
 
                   <div class="mb-3 form-check" id="check2">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                    <input id = "mid"  class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
                     <label class="form-check-label2" for="exampleRadios2">Mid Population</label>
                   </div>
 
                   <div class="mb-3 form-check" id="check3">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
+                    <input id = "low" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
                     <label class="form-check-label3" for="exampleRadios3">Low Population</label>
                   </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+                <button type="button" class="btn btn-primary" id="submit-button">Submit</button>
+            </div>
         </div> 
    </div>
 
     <div class="container-form-output border border-dark">
-        <p class="output">
+        <p class="output" id = "output">
             OUTPUT
         </p>
     </div>
