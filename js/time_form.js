@@ -81,7 +81,7 @@ function getSuggest(){
                     for (let i = 0; i < 3; i++) {
                         if(array2[2] == array[i]["key"]){
                             console.log(array[i]["value"])
-                            document.getElementById("output").innerHTML = array[i]["value"];
+                            document.getElementById("output").innerHTML = "We suggest you to go at the " +  array[i]["value"];
                             break;
                         }
                     }
@@ -91,7 +91,7 @@ function getSuggest(){
                     for (let i = 0; i < 3; i++) {
                         if(array2[1] == array[i]["key"]){
                             console.log(array[i]["value"])
-                            document.getElementById("output").innerHTML = array[i]["value"];
+                            document.getElementById("output").innerHTML = "We suggest you to go at the " +  array[i]["value"];
                             break;
                         }
                     }
@@ -101,7 +101,7 @@ function getSuggest(){
                     for (let i = 0; i < 3; i++) {
                         if(array2[0] == array[i]["key"]){
                             console.log(array[i]["value"])
-                            document.getElementById("output").innerHTML = array[i]["value"];
+                            document.getElementById("output").innerHTML = "We suggest you to go at the " + array[i]["value"];
                             break;
                         }
                     }

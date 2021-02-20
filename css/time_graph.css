@@ -15,23 +15,41 @@ header .jumbotron{
     
 }
 
-.container{
+.timegraph{
+    background-color: rgba(132, 140, 245, 0.4);
+    text-align: center;
+    width: 280px;
+    font-size: 50px;
+    margin-left: 630px;
+}
+
+.date{
     text-align: center;
 }
-.container-info{
+
+.container{
+    position: absolute;
+}
+
+.container-info{  
     display: inline-block;
-    text-align:  center;
-    margin-right: 300px;
+    margin-left: 75px;
     width: 200px;
     height: 300px;
     
 }
 
-
 .container-graph{
     display: inline-block;
-    text-align:  center;
-    width: 400px;
-    height: 500px;
+    margin-left: 510px;
+    width: 200px;
+    height: 300px;
     
+}
+
+.date{
+    background-color: rgba(184, 184, 184, 0.6);
+    font-size: 30px;
+    width: 500px;
+    margin-left: 525px;
 }
