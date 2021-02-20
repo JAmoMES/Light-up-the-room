@@ -159,29 +159,12 @@ def switch_find():
 
 ############## GRAPH ##################
 
-@app.route('/cost_graph',methods=['GET'])
-@cross_origin()
-def cost_graph_cal():
-    data = room_info_db.find().sort("_id", -1)
-    res = {
-            "ID" : 0,
-            "Time_in" : 0
-          }
-    return {"result": res}
-
-# @app.route('/people_graph',methods=['GET'])
-# @cross_origin()
-# def people_graph_cal():
-#     res= {}
-#     return {"result" : res}
- 
  #calculate elec bill (ฮอนหาสูตรคิดค่าไฟมาใส่ให้หน่อย) time in sec
 def cal_bill(time):
-    cost = time
-    #cost = ...
+    cost = (0.032*time*nlight)
     return cost
 
- #James
+#James
 @app.route('/elecbill', methods=['GET'])
 @cross_origin()
 def bill():
