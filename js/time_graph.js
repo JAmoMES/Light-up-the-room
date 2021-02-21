@@ -41,7 +41,7 @@ function drawChart() {
 
     var options = {
         //fontName: 'LucidaBrightRegular',
-        title: 'amount of people in the room',
+        title: 'Amount of people in the room',
         titleTextStyle:{
             fontSize: 22
         },
