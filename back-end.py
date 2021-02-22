@@ -1,5 +1,5 @@
 import os
-from dotenv import env
+from dotenv import load_dotenv
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
 from flask_pymongo import PyMongo
